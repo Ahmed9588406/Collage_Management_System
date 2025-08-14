@@ -5,7 +5,10 @@ public class Class {
     private String ID;
     private String title;
 
-    Class(){}
+    public Class(){}
+    public Class(int classID,Database database){
+
+    }
 
     public String getID(){
         return ID;

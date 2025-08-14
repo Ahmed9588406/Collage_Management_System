@@ -81,7 +81,7 @@ public class UpdateEmployee implements Operation {
             employee.setPassword(password);
         }
 
-        String currentDeptDisplay = (employee.getDepartment() != null) ? employee.getDepartment().getTitle() : "No Department";
+        String currentDeptDisplay = (employee.getDepartment() != null) ? employee.getDepartment().getName() : "No Department";
         System.out.println("Enter Department ID (-1 to keep " + currentDeptDisplay + ", -2 to show all departments):");
         int depID = scanner.nextInt();
 
@@ -98,9 +98,9 @@ public class UpdateEmployee implements Operation {
 
             // Check if the department exists and was loaded successfully
             // A valid department should have both non-null title and valid ID
-            if (newDepartment.getTitle() != null && !newDepartment.getTitle().contains("(Not Found)") && !newDepartment.getTitle().contains("(Error)")) {
+            if (newDepartment.getName() != null && !newDepartment.getName().contains("(Not Found)") && !newDepartment.getName().contains("(Error)")) {
                 employee.setDepartment(newDepartment);
-                System.out.println("✅ Department updated successfully to: " + newDepartment.getTitle());
+                System.out.println("✅ Department updated successfully to: " + newDepartment.getName());
             } else {
                 System.out.println("❌ Department with ID " + depID + " not found! Keeping current department.");
                 // Restore the original department object
@@ -117,7 +117,7 @@ public class UpdateEmployee implements Operation {
         }
 
         // Check if the current department is a placeholder (from loading issues)
-        String deptTitle = employee.getDepartment().getTitle();
+        String deptTitle = employee.getDepartment().getName();
         if (deptTitle != null && (deptTitle.contains("(Not Found)") || deptTitle.contains("(Error)"))) {
             System.out.println("⚠️ Warning: Employee has an invalid department reference.");
             System.out.println("💡 You may want to assign a valid department before updating.");

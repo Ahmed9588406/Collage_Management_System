@@ -14,6 +14,13 @@ public class ShowAllEmpoyee implements Operation {
 
     @Override
     public void oper(Database database, Scanner scanner) {
+        ArrayList<Employee>employees = getAllEmployees(database);
+        for (Employee e:employees){
+            e.print();
+        }
+    }
+
+    public ArrayList<Employee> getAllEmployees(Database database){
         ArrayList<Employee>employees = new ArrayList<>();
         ArrayList<Integer> depIDS = new ArrayList<>();
         try {
@@ -43,5 +50,6 @@ public class ShowAllEmpoyee implements Operation {
         for (Employee e:employees){
             e.print();
         }
+        return employees;
     }
 }

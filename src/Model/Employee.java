@@ -34,14 +34,14 @@ public class Employee {
                     try {
                         Department dept = new Department(depID, database);
                         // Only set department if it was successfully loaded
-                        if (dept.getTitle() != null) {
+                        if (dept.getName() != null) {
                             setDepartment(dept);
                         } else {
                             System.out.println("⚠️ Warning: Department with ID " + depID + " not found for employee " + ID);
                             // Create a placeholder department to avoid null issues
                             Department placeholder = new Department();
                             placeholder.setID(depID);
-                            placeholder.setTitle("Department " + depID + " (Not Found)");
+                            placeholder.setName("Department " + depID + " (Not Found)");
                             setDepartment(placeholder);
                         }
                     } catch (Exception e) {
@@ -50,7 +50,7 @@ public class Employee {
                         // Create a placeholder department
                         Department placeholder = new Department();
                         placeholder.setID(depID);
-                        placeholder.setTitle("Department " + depID + " (Error)");
+                        placeholder.setName("Department " + depID + " (Error)");
                         setDepartment(placeholder);
                     }
                 } else {
@@ -147,7 +147,7 @@ public class Employee {
             }
 
             // Check if department is a placeholder (invalid department)
-            String deptTitle = getDepartment().getTitle();
+            String deptTitle = getDepartment().getName();
             if (deptTitle != null && (deptTitle.contains("(Not Found)") || deptTitle.contains("(Error)"))) {
                 System.out.println("⚠️ Warning: Updating employee with placeholder department: " + deptTitle);
                 // You might want to add additional validation or ask user confirmation here
@@ -182,10 +182,23 @@ public class Employee {
         System.out.println("Name \t\t: " +getFirstname() + getLastname());
         System.out.println("Email: " +getEmail());
         System.out.println("PhoneNumber: " +getPhoneNumber());
-        System.out.println("Departmant: "+ getDepartment().getTitle());
+        System.out.println("Departmant: "+ getDepartment().getName());
         System.out.println("BirthDate: " +getBirthDate());
         System.out.println("Salary: "+getSalary());
         System.out.println("----------------------------------------");
+    }
+
+    public void create(Database database){
+        try{
+
+
+
+            String insert = "INSERT INTO `employees`(`ID`, `FirstName`, `LastName`, `Email`, `PhoneNumber`, `BirthDate`, `Salary`, `Department`, `Password`) VALUES ('"+ ID +"','"+ firstname +"','"+ lastname +"','"+ email +"','"+ phoneNumber +"','"+ birthDate +"','"+ salary +"','"+ department.getID() +"','"+ password +"')";
+            database.getStatement().executeUpdate(insert);
+            System.out.println("Employee added Successfully");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
 }

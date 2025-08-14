@@ -9,7 +9,7 @@ public class Student {
     private String birthDate;
     private Class c;
 
-    Student(){}
+    public Student(){}
 
     public String getID() {
         return ID;
@@ -63,7 +63,10 @@ public class Student {
         this.birthDate = birthDate;
     }
 
-    public void setC(Class c) {
+    public void setClass(Class c) {
         this.c = c;
+    }
+    public void create(Database database){
+        
     }
 }
